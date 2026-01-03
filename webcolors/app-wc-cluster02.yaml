@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web-color-cluster02
+  namespace: argocd
+spec:
+  source:
+    repoURL: https://github.com/cadugr/web-color-deploy-new
+    path: k8s
+    targetRevision: HEAD
+  destination:
+    namespace: web-color
+    server: https://e0188643-eb1b-466e-ac7b-588d3852e494.k8s.ondigitalocean.com
+  project: default
+  syncPolicy:
+    automated: 
+      prune: true 
+      selfHeal: true 
+    syncOptions:    
+    - CreateNamespace=true 
